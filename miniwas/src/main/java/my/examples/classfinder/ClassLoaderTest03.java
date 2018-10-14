@@ -1,4 +1,4 @@
-package my.examples.etc;
+package my.examples.classfinder;
 
 import java.io.File;
 import java.lang.reflect.Method;

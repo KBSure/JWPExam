@@ -1,4 +1,4 @@
-package my.examples.etc;
+package my.examples.classfinder;
 
 public class ClassLoaderTest02 {
     public static void main(String[] args) throws Exception {
@@ -6,7 +6,7 @@ public class ClassLoaderTest02 {
         sample1.print();
         sample1.print("test");
 
-        Class clazz = Class.forName("my.examples.etc.Sample");
+        Class clazz = Class.forName("my.examples.classfinder.Sample");
         Sample sample2 = (Sample) clazz.newInstance();
         sample2.print();
         sample2.print("test");

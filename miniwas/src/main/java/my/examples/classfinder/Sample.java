@@ -1,4 +1,4 @@
-package my.examples.etc;
+package my.examples.classfinder;
 
 public class Sample {
     public void print(){

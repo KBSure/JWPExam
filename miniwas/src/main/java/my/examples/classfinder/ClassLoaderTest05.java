@@ -1,4 +1,4 @@
-package my.examples.etc;
+package my.examples.classfinder;
 
 import java.util.List;
 
@@ -10,5 +10,8 @@ public class ClassLoaderTest05 {
         for(String className : allClasses){
             System.out.println(className);
         }
+//
+//        WebServletMapperManager wsmm = new WebServletMapperManager();
+//        wsmm.findServletMap();
     }
 }
