@@ -1,10 +1,16 @@
 package my.examples.miniwas;
 
+import my.examples.servlet.DefaultServlet;
+
 import java.io.*;
 import java.net.Socket;
 
 public class Handler extends Thread{
     private Socket socket;
+
+    // map2에 path와 servletInstance -> Handler에서 호출 올 때 인스턴스 존재하는지 검사해서 작성
+
+    // Manager의 메서드를 호출해서 사용 -> Handler
 
     public Handler(Socket socket){
         this.socket = socket;
