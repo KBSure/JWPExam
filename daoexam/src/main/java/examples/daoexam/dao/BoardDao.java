@@ -6,13 +6,12 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 public class BoardDao {
@@ -31,6 +30,14 @@ public class BoardDao {
     public Long addBoard(Board board){
         SqlParameterSource params = new BeanPropertySqlParameterSource(board);
         return insertAction.executeAndReturnKey(params).longValue();
+    }
+
+    public int updateCount(Long id){
+        String sql = "update board set read_count = read_count + 1 where id = :id";
+//        Map<String, Long> map = new HashMap<>();
+//        map.put("id", id);
+        Map<String, Long> map = Collections.singletonMap("id", id);
+        return jdbc.update(sql, map);
     }
 
     public int deleteBoard(Long id){
@@ -65,5 +72,14 @@ public class BoardDao {
         }catch(Exception ex){
             return null;
         }
+    }
+
+    public List<Board> getBoards(Long start, Long end){
+        String sql = "select id, name, title, content, regdate, read_count from board where id >= :start and id <= :ends ";
+        Map<String, Long> map = new HashMap<>();
+        map.put("start", start);
+        map.put("ends", end);
+        BeanPropertyRowMapper<Board> rowMapper = BeanPropertyRowMapper.newInstance(Board.class);
+        return jdbc.query(sql, map, rowMapper);
     }
 }
